@@ -35,25 +35,28 @@ def create_control_panel(page, task_column):
     )
 
 def create_close_button(page):
-    # Botón para cerrar la ventana
+    # Mostrar siempre el botón en Android
+    visible = page.platform != "android"  # El botón solo será visible por hover en escritorio
+
     close_button = ft.IconButton(
         ft.icons.CLOSE_OUTLINED,
-        on_click=lambda e: e.page.window.close(),
+        on_click=lambda e: page.window.destroy(),
         icon_size=35,
         icon_color=ft.colors.RED,
-        visible=False  # Inicialmente oculto
+        visible=visible  # Mostrar o no basado en la plataforma
     )
 
-    # Función para manejar el evento de hover (muestra el botón al pasar el mouse)
+    # Lógica de hover solo para plataformas no móviles
     def handle_hover(e):
-        close_button.visible = e.data == "true"
-        page.update()
+        if page.platform != "android":
+            close_button.visible = e.data == "true"
+            page.update()
 
-    # Contenedor del botón con comportamiento de hover
     return ft.Container(
         content=close_button,
         alignment=ft.alignment.center,
         padding=5,
-        on_hover=handle_hover,
+        on_hover=handle_hover if page.platform != "android" else None,  # Deshabilitar hover en Android
         margin=ft.Margin(left=0, top=10, right=0, bottom=0)
     )
+

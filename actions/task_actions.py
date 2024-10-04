@@ -10,7 +10,7 @@ def add_clicked(e, page, task_column, new_task):
             "label": label,
             "completed": False
         }
-        save_task(task)  # Guardar la nueva tarea en el archivo JSON
+        save_task(page, task)  # Pasar `page` como primer argumento
         add_task_to_column(page, task_column, task)
         new_task.value = ""
         page.update()
@@ -23,10 +23,10 @@ def delete_checked_tasks(e, page, task_column):
             task_id = task_panel.task_id
             checked_ids.append(task_id)
 
-    delete_task(checked_ids)  # Eliminar las tareas marcadas en el archivo JSON
+    delete_task(page, checked_ids)  # Pasar `page` como primer argumento
     task_column.controls.clear()
 
-    tasks = load_tasks()  # Volver a cargar las tareas
+    tasks = load_tasks(page)
     for task in tasks:
         if not task["completed"]:
             add_task_to_column(page, task_column, task)
