@@ -1,0 +1,29 @@
+import flet as ft
+from db.db_task import save_all_tasks, load_tasks
+
+def add_task_to_column(page, task_column, task):
+    checkbox = ft.Checkbox(label=task["label"], value=task["completed"])
+
+    def checkbox_changed(e):
+        task["completed"] = checkbox.value
+        # Guardar el estado actualizado de todas las tareas
+        tasks = load_tasks()  # Recargar todas las tareas
+        for t in tasks:
+            if t["id"] == task["id"]:
+                t["completed"] = task["completed"]
+        save_all_tasks(tasks)  # Guardar todas las tareas con los estados actualizados
+
+    checkbox.on_change = checkbox_changed
+
+    task_panel = ft.Card(
+        content=ft.Container(
+            content=ft.Row(controls=[checkbox], alignment="start"),
+            padding=10
+        ),
+        margin=ft.Margin(left=25, top=10, right=30, bottom=-10)
+    )
+
+    task_panel.task_id = task["id"]
+    task_panel.checkbox = checkbox
+    task_column.controls.append(task_panel)
+    page.update()

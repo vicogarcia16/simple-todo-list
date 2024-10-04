@@ -1,0 +1,25 @@
+# This project was generated with 0.3.19 using template: https://github.com/beeware/briefcase-template@v0.3.19
+[tool.briefcase]
+project_name = "todo-list"
+bundle = "com.apptodolist"
+version = "0.0.1"
+url = "https://vicogarcia.com"
+license.file = "LICENSE"
+author = "Víctor García"
+author_email = "mg_619@hotmail.com"
+
+[tool.briefcase.app.appdropdown]
+formal_name = "Todo-List"
+description = "Todo aplication"
+long_description = """More details about the app should go here.
+"""
+sources = [
+    "src/todo-list",
+]
+test_sources = [
+    "tests",
+]
+requires = [
+    "flet"
+]
+
