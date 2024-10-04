@@ -1,5 +1,6 @@
 import flet as ft
 from actions.task_actions import add_clicked, delete_checked_tasks
+import sys
 
 def create_control_panel(page, task_column):
     # Campo de texto para nueva tarea
@@ -40,7 +41,7 @@ def create_close_button(page):
 
     close_button = ft.IconButton(
         ft.icons.CLOSE_OUTLINED,
-        on_click=lambda e: e.page.window.close(),
+        on_click=lambda e: sys.exit(),
         icon_size=35,
         icon_color=ft.colors.RED,
         visible=visible  # Mostrar o no basado en la plataforma
