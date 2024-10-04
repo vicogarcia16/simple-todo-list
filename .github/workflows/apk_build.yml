@@ -51,10 +51,10 @@ jobs:
         distribution: 'temurin' # See https://github.com/marketplace/actions/setup-java-jdk#supported-distributions for available options
         java-version: '21'
 
-    - name: Ensure tasks.json is in assets
+    - name: Generate tasks.json file
       run: |
-        mkdir -p assets
-        cp tasks.json assets/  # Copiar tasks.json a la carpeta assets
+        mkdir -p assets 
+        echo '[]' > assets/tasks.json 
 
     - name: Flet Build APK
       run: |
