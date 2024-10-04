@@ -5,13 +5,16 @@ def add_task_to_column(page, task_column, task):
     checkbox = ft.Checkbox(label=task["label"], value=task["completed"])
 
     def checkbox_changed(e):
+        # Actualizar el estado de la tarea
         task["completed"] = checkbox.value
-        # Guardar el estado actualizado de todas las tareas
-        tasks = load_tasks()  # Recargar todas las tareas
+        # Cargar todas las tareas del archivo JSON
+        tasks = load_tasks(page)
+        # Buscar la tarea en la lista y actualizar su estado
         for t in tasks:
             if t["id"] == task["id"]:
                 t["completed"] = task["completed"]
-        save_all_tasks(tasks)  # Guardar todas las tareas con los estados actualizados
+        # Guardar todas las tareas con el estado actualizado
+        save_all_tasks(page, tasks)
 
     checkbox.on_change = checkbox_changed
 

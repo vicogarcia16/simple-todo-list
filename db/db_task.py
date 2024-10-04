@@ -37,6 +37,12 @@ def save_task(page: ft.Page, task):
     with open(tasks_file_path, "w") as f:
         json.dump(tasks, f)
 
+# Guardar todas las tareas en el archivo JSON (sobrescribir todo)
+def save_all_tasks(page: ft.Page, tasks):
+    tasks_file_path = get_tasks_file_path(page)
+    with open(tasks_file_path, "w") as f:
+        json.dump(tasks, f)
+
 # Eliminar tareas marcadas y actualizar el archivo JSON
 def delete_task(page: ft.Page, checked_ids):
     tasks = load_tasks(page)
