@@ -40,7 +40,7 @@ def create_close_button(page):
 
     close_button = ft.IconButton(
         ft.icons.CLOSE_OUTLINED,
-        on_click=lambda e: page.window.destroy(),
+        on_click=lambda e: e.page.window.close(),
         icon_size=35,
         icon_color=ft.colors.RED,
         visible=visible  # Mostrar o no basado en la plataforma
